@@ -120,3 +120,6 @@ button {
     transform: translateY(0);
   }
 }
+#letter {
+  white-space: normal;
+}
