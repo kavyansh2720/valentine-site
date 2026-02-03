@@ -162,6 +162,6 @@ button {
     transform: translateY(0);
   }
 }
-#letter {
+.letter-text {
   white-space: normal;
 }
