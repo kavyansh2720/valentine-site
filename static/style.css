@@ -180,3 +180,11 @@ button {
   z-index: 9999;
   pointer-events: none;
 }
+.flash {
+  animation: flash 0.4s ease;
+}
+
+@keyframes flash {
+  0% { background-color: rgba(255,255,255,0.6); }
+  100% { background-color: transparent; }
+}
