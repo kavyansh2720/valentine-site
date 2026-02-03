@@ -12,13 +12,10 @@
     <p>Will you be my Valentine? 🌹</p>
 
     <div class="buttons">
-        <a href="/yes">
-            <button class="yes-btn" onclick="celebrateYes()">YES 💖</button>
-        </a>
-        <button id="noBtn">NO 😶</button>
-    </div>
+  <button class="yes-btn" onclick="celebrateYes()">YES 💖</button>
+  <button class="no-btn" onmouseover="moveNo()">NO 🙈</button>
 </div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="/static/script.js"></script>
 </body>
 </html>
