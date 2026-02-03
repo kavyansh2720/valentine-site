@@ -204,3 +204,21 @@ button {
     transform: scale(1) translateY(0);
   }
 }
+.rain-heart {
+  position: fixed;
+  top: -30px;
+  animation: fall 5s linear forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(110vh) scale(1.4);
+    opacity: 0;
+  }
+  }
