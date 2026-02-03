@@ -18,7 +18,7 @@
 
   <!-- Typing Script (MUST be after the element) -->
   <script>
-    const text = `Dear wifey 💖
+  const text = `Dear wifey 💖
 
 Happy Valentine’s Day babu 💕
 
@@ -43,20 +43,37 @@ and proud to call you mine. 💘
 — your hubby  
 Mr. Kavyansh Rashika Arora`;
 
-    let index = 0;
-    const speed = 35;
+  let index = 0;
+  const speed = 35;
 
-    function typeLetter() {
-      if (index < text.length) {
-        document.getElementById("letter").innerHTML +=
-          text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
-        index++;
-        setTimeout(typeLetter, speed);
-      }
+  function typeLetter() {
+    if (index < text.length) {
+      document.getElementById("letter").innerHTML +=
+        text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+      index++;
+      setTimeout(typeLetter, speed);
+    } else {
+      startHeartRain(); // 💖 START AFTER TYPING
     }
+  }
 
-    window.onload = typeLetter;
-  </script>
+  function startHeartRain() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "rain-heart";
 
-</body>
-</html>
+      const hearts = ["❤️", "💖", "💕", "💗"];
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 22 + 14 + "px";
+      heart.style.opacity = Math.random() * 0.4 + 0.6;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  }
+
+  window.onload = typeLetter;
+</script>
