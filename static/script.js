@@ -31,3 +31,42 @@ setInterval(() => {
 
   setTimeout(() => heart.remove(), 7000);
 }, 300);
+function celebrateYes() {
+  // Button pop animation
+  const yesBtn = document.querySelector(".yes-btn");
+  yesBtn.classList.add("yes-pop");
+
+  // Confetti hearts burst
+  for (let i = 0; i < 25; i++) {
+    const burst = document.createElement("div");
+    burst.className = "burst-heart";
+    burst.innerHTML = "💖";
+    burst.style.left = yesBtn.getBoundingClientRect().left + 40 + "px";
+    burst.style.top = yesBtn.getBoundingClientRect().top + "px";
+    burst.style.fontSize = Math.random() * 20 + 14 + "px";
+    burst.style.opacity = Math.random() * 0.5 + 0.5;
+    document.body.appendChild(burst);
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 120 + 50;
+
+    burst.animate([
+      { transform: "translate(0,0)", opacity: 1 },
+      {
+        transform: `translate(${Math.cos(angle) * distance}px,
+                               ${Math.sin(angle) * distance}px)`,
+        opacity: 0
+      }
+    ], {
+      duration: 900,
+      easing: "ease-out"
+    });
+
+    setTimeout(() => burst.remove(), 900);
+  }
+
+  // Go to letter page after celebration
+  setTimeout(() => {
+    window.location.href = "/yes";
+  }, 1000);
+}
