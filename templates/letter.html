@@ -9,14 +9,15 @@
 <body class="letter-body">
 
   <div class="letter-box">
-
     <h2>Good choice babu 😘</h2>
 
+    <!-- Letter will type here -->
     <p id="letter" class="letter-text"></p>
+  </div>
 
-<script>
-  const text = `
-Dear wifey 💖
+  <!-- Typing Script (MUST be after the element) -->
+  <script>
+    const text = `Dear wifey 💖
 
 Happy Valentine’s Day babu 💕
 
@@ -29,7 +30,7 @@ aur honestly tumhari har harkat meri favourite hai bubu.
 You are really special to me.
 I can’t imagine even a single second without you.
 
-I know main din mein bohot baar “I love you” bolta hoon,
+I know main din mein bohot baar "I love you" bolta hoon,
 but I’ll never get tired of saying it —
 even a thousand times a day.
 
@@ -38,26 +39,23 @@ the most beautiful girl I know,
 and I am always proud of you
 and proud to call you mine. 💘
 
-— your hubby
-Mr. Kavyansh Rashika Arora
-  `;
+— your hubby  
+Mr. Kavyansh Rashika Arora`;
 
-  let i = 0;
-  const speed = 35; // typing speed
+    let index = 0;
+    const speed = 35;
 
-  function typeLetter() {
-    if (i < text.length) {
-      document.getElementById("letter").innerHTML +=
-        text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-      i++;
-      setTimeout(typeLetter, speed);
+    function typeLetter() {
+      if (index < text.length) {
+        document.getElementById("letter").innerHTML +=
+          text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+        index++;
+        setTimeout(typeLetter, speed);
+      }
     }
-  }
 
-  window.onload = typeLetter;
-</script>
-
-  </div>
+    window.onload = typeLetter;
+  </script>
 
 </body>
 </html>
