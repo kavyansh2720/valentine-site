@@ -14,13 +14,20 @@ noBtn.addEventListener("mouseover", () => {
     scale += 0.1;
     yesBtn.style.transform = `scale(${scale})`;
 });
+// Floating Hearts - spread across screen
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerHTML = "❤️";
+
+  const hearts = ["❤️", "💖", "💕", "💗"];
+  heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  heart.style.fontSize = Math.random() * 25 + 12 + "px";
+  heart.style.opacity = Math.random() * 0.5 + 0.3; // translucent
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 6000);
-}, 400);
+  setTimeout(() => heart.remove(), 7000);
+}, 300);
