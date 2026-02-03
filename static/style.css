@@ -46,3 +46,13 @@ button {
     margin-top: 30px;
     font-weight: bold;
 }
+.teddy {
+  width: 120px;
+  animation: bounce 2s infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
