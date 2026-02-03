@@ -2,78 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For My Wifey 💌</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <title>For My Wifey ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #fff1f7);
+      overflow-x: hidden;
+    }
+
+    /* Background sparkles */
+    .bg-sparkles {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Floating hearts */
+    .bg-hearts::before {
+      content: "💗 💖 💕 💘 💓";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      font-size: 26px;
+      opacity: 0.15;
+      animation: floatHearts 35s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatHearts {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-400px, -600px); }
+    }
+
+    /* Letter box */
+    .letter-box {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 25px 20px 40px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(255,105,180,0.3);
+      text-align: center;
+    }
+
+    /* Teddy */
+    .teddy {
+      width: 120px;
+      margin: 0 auto 10px;
+      animation: hug 2.5s infinite ease-in-out;
+    }
+
+    @keyframes hug {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Letter text */
+    #letter-text {
+      white-space: pre-line;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #444;
+      margin-top: 15px;
+    }
+
+    /* Heart rain */
+    .heart {
+      position: fixed;
+      top: -20px;
+      font-size: 20px;
+      animation: fall 5s linear forwards;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
-<body class="letter-body">
+<body>
 
+  <!-- Background -->
+  <div class="bg-hearts"></div>
+  <div class="bg-sparkles"></div>
+
+  <!-- Letter -->
   <div class="letter-box">
-    <img src="/static/images/teddy.png" class="teddy hug">
-    <h2>Good choice babu 😘</h2>
+    <img src="https://i.imgur.com/6o5V4yR.png" alt="teddy" class="teddy">
 
-    <!-- Letter will type here -->
-    <p id="letter" class="letter-text"></p>
+    <div id="letter-text"></div>
   </div>
 
-  <!-- Typing Script (MUST be after the element) -->
+  <!-- JS -->
   <script>
-  const text = `Dear wifey 💖
+    const letter = `Dear wifey 💖
+Happy Valentine's Day babu ❤️
 
-Happy Valentine’s Day babu 💕
+I am really lucky to have you in my life babyy, not just as my Valentine but as mine — my partner in everything. Har ek din mujhe ye sikhaata hai ki real comfort, care aur love kya hota hai, aur honestly ye sab meri favourite cheezein hain bubu.
 
-I am the luckiest man to have you in my life babyy,
-not just as my Valentine but as mine — my partner in everything.
+You are really really special to me. I can't imagine even a single second without you. I know main din mein bohot baar "I love you" bolta hoon, but I’ll never get tired of saying it — not even a thousand times a day.
 
-Har ek din mujhe sikhata hai ki real comfort, care aur love kya hota hai,
-aur honestly tumhari har harkat meri favourite hai bubu.
+Because you are my cute little princess 👑, the most beautiful girl I know, and I am hamesha proud of you and proud to call you mine 💕
 
-You are really special to me.
-I can’t imagine even a single second without you.
+Yours forever,
+Kavyansh Rashika Arora`;
 
-I know main din mein bohot baar "I love you" bolta hoon,
-but I’ll never get tired of saying it —
-even a thousand times a day.
+    let i = 0;
+    const speed = 40;
+    const textEl = document.getElementById("letter-text");
 
-Because you are my cute little princess,
-the most beautiful girl I know,
-and I am always proud of you
-and proud to call you mine. 💘
-
-— your hubby  
-Mr. Kavyansh Rashika Arora`;
-
-  let index = 0;
-  const speed = 35;
-
-  function typeLetter() {
-    if (index < text.length) {
-      document.getElementById("letter").innerHTML +=
-        text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
-      index++;
-      setTimeout(typeLetter, speed);
-    } else {
-      startHeartRain(); // 💖 START AFTER TYPING
+    function typeLetter() {
+      if (i < letter.length) {
+        textEl.innerHTML += letter.charAt(i);
+        i++;
+        setTimeout(typeLetter, speed);
+      } else {
+        startHeartRain();
+      }
     }
-  }
 
-  function startHeartRain() {
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "rain-heart";
+    typeLetter();
 
-      const hearts = ["❤️", "💖", "💕", "💗"];
-      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    function startHeartRain() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 10 + 15) + "px";
+        document.body.appendChild(heart);
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 22 + 14 + "px";
-      heart.style.opacity = Math.random() * 0.4 + 0.6;
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+  </script>
 
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 5000);
-    }, 300);
-  }
-
-  window.onload = typeLetter;
-</script>
+</body>
+</html>
