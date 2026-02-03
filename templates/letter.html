@@ -12,33 +12,50 @@
 
     <h2>Good choice babu 😘</h2>
 
-    <p class="letter-text">
-      Dear wifey <br><br>
+    <p id="letter" class="letter-text"></p>
 
-      Happy Valentine’s Day babu 💕 <br><br>
+<script>
+  const text = `
+Dear wifey 💖
 
-      I am the luckiest man to have you in my life babyy,
-      not just as my Valentine but as mine — my partner in
-      literally everything. <br><br>
+Happy Valentine’s Day babu 💕
 
-      Har ek din mujhe sikhaata hai ki real comfort, care
-      aur love kya hota hai, aur honestly tumhari har
-      harkat meri favourite hai bubu. <br><br>
+I am the luckiest man to have you in my life babyy,
+not just as my Valentine but as mine — my partner in everything.
 
-      You are really really special to me. I can’t imagine
-      even a single second without you. I know main din
-      mein bohot baar “I love you” bolta hoon, but I’ll
-      never get tired of saying it — even a thousand times
-      a day. <br><br>
+Har ek din mujhe sikhata hai ki real comfort, care aur love kya hota hai,
+aur honestly tumhari har harkat meri favourite hai bubu.
 
-      Because you are my cute little princess, the most
-      beautiful girl I know, and I am always proud of you
-      and proud to call you mine. 💖
-      <br><br>
+You are really special to me.
+I can’t imagine even a single second without you.
 
-      — your hubby <br>
-      <strong>Mr. Kavyansh Rashika Arora</strong>
-    </p>
+I know main din mein bohot baar “I love you” bolta hoon,
+but I’ll never get tired of saying it —
+even a thousand times a day.
+
+Because you are my cute little princess,
+the most beautiful girl I know,
+and I am always proud of you
+and proud to call you mine. 💘
+
+— your hubby
+Mr. Kavyansh Rashika Arora
+  `;
+
+  let i = 0;
+  const speed = 35; // typing speed
+
+  function typeLetter() {
+    if (i < text.length) {
+      document.getElementById("letter").innerHTML +=
+        text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+      i++;
+      setTimeout(typeLetter, speed);
+    }
+  }
+
+  window.onload = typeLetter;
+</script>
 
   </div>
 
