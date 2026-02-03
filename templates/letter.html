@@ -5,7 +5,7 @@
   <title>For My Wifey ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
   <style>
@@ -45,14 +45,14 @@
       to { transform: translate(-400px, -600px); }
     }
 
-    /* Letter box */
+    /* Letter container */
     .letter-box {
       position: relative;
       z-index: 2;
-      max-width: 700px;
+      max-width: 720px;
       margin: 40px auto;
-      padding: 25px 20px 40px;
-      background: rgba(255,255,255,0.95);
+      padding: 25px 22px 45px;
+      background: rgba(255,255,255,0.96);
       border-radius: 22px;
       box-shadow: 0 20px 50px rgba(255,105,180,0.3);
       text-align: center;
@@ -60,13 +60,13 @@
 
     /* Teddy */
     .teddy {
-      width: 120px;
-      margin: 0 auto 10px;
+      width: 140px;
+      margin: 0 auto 12px;
       animation: hug 2.5s infinite ease-in-out;
     }
 
     @keyframes hug {
-      0%,100% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
     }
 
@@ -74,7 +74,7 @@
     #letter-text {
       white-space: pre-line;
       font-size: 17px;
-      line-height: 1.7;
+      line-height: 1.75;
       color: #444;
       margin-top: 15px;
     }
@@ -100,21 +100,29 @@
 
 <body>
 
-  <!-- Background -->
+  <!-- Background layers -->
   <div class="bg-hearts"></div>
   <div class="bg-sparkles"></div>
 
   <!-- Letter -->
   <div class="letter-box">
-    <img src="https://i.imgur.com/6o5V4yR.png" alt="teddy" class="teddy">
 
+    <!-- LOCAL TEDDY IMAGE -->
+    <img 
+      src="{{ url_for('static', filename='images/teddy.png') }}" 
+      alt="Teddy Hug"
+      class="teddy"
+    >
+
+    <!-- Letter text -->
     <div id="letter-text"></div>
+
   </div>
 
   <!-- JS -->
   <script>
-    const letter = `Dear wifey 💖
-Happy Valentine's Day babu ❤️
+    const letter = `Dear wifey ❤️
+Happy Valentine's Day babu 😘
 
 I am really lucky to have you in my life babyy, not just as my Valentine but as mine — my partner in everything. Har ek din mujhe ye sikhaata hai ki real comfort, care aur love kya hota hai, aur honestly ye sab meri favourite cheezein hain bubu.
 
@@ -125,14 +133,14 @@ Because you are my cute little princess 👑, the most beautiful girl I know, an
 Yours forever,
 Kavyansh Rashika Arora`;
 
-    let i = 0;
+    let index = 0;
     const speed = 40;
-    const textEl = document.getElementById("letter-text");
+    const textElement = document.getElementById("letter-text");
 
     function typeLetter() {
-      if (i < letter.length) {
-        textEl.innerHTML += letter.charAt(i);
-        i++;
+      if (index < letter.length) {
+        textElement.innerHTML += letter.charAt(index);
+        index++;
         setTimeout(typeLetter, speed);
       } else {
         startHeartRain();
@@ -153,7 +161,7 @@ Kavyansh Rashika Arora`;
         setTimeout(() => {
           heart.remove();
         }, 5000);
-      }, 300);
+      }, 280);
     }
   </script>
 
