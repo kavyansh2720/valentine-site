@@ -1,21 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Valentine 💖</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>For My Baby ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffd1dc, #fff0f6);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Hanging hearts */
+    .hanger {
+      position: fixed;
+      top: -5px;
+      font-size: 26px;
+      animation: swing 3s ease-in-out infinite;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    @keyframes swing {
+      0% { transform: rotate(-6deg); }
+      50% { transform: rotate(6deg); }
+      100% { transform: rotate(-6deg); }
+    }
+
+    /* Floating background hearts */
+    .bg-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 18px;
+      animation: floatUp 9s linear infinite;
+      opacity: 0.4;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh); }
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      z-index: 2;
+      max-width: 340px;
+      margin: 90px auto;
+      background: rgba(255,255,255,0.96);
+      padding: 30px 22px 38px;
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(255, 105, 180, 0.35);
+    }
+
+    .rose {
+      font-size: 60px;
+      margin-bottom: 5px;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #ff4f8b;
+      margin-bottom: 15px;
+    }
+
+    .message {
+      font-size: 14.5px;
+      color: #555;
+      margin-bottom: 7px;
+    }
+
+    .buttons {
+      margin-top: 28px;
+      position: relative;
+      height: 130px;
+    }
+
+    #yesBtn {
+      padding: 14px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 35px;
+      background: linear-gradient(135deg, #ff5fa2, #ff85b3);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(255,95,162,0.5);
+      transition: all 0.4s ease;
+    }
+
+    #noBtn {
+      position: absolute;
+      padding: 12px 24px;
+      font-size: 15px;
+      border: none;
+      border-radius: 25px;
+      background: #eee;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+  </style>
 </head>
+
 <body>
-<img src="/static/images/teddy.png" class="teddy">
-<div class="container">
-    <h1>Hey baby 💕</h1>
-    <p>Will you be my Valentine? 🌹</p>
+
+  <!-- Hanging hearts -->
+  <div class="hanger" style="left:10%">💖</div>
+  <div class="hanger" style="left:30%">💘</div>
+  <div class="hanger" style="left:55%">💕</div>
+  <div class="hanger" style="left:75%">💗</div>
+
+  <!-- Main Proposal Card -->
+  <div class="card">
+    <div class="rose">🌹</div>
+    <h1>Will you be my Valentine? 💌</h1>
+
+    <div class="message">You make my world brighter ✨</div>
+    <div class="message">You are my comfort & my chaos 💖</div>
+    <div class="message">Tu meri favourite feeling hai 💕</div>
+    <div class="message">Say yes na baby pleaseee 🥺</div>
 
     <div class="buttons">
-  <button class="yes-btn" onclick="celebrateYes()">YES 💖</button>
-  <button class="no-btn" onmouseover="moveNo()">NO 🙈</button>
-</div>
+      <button id="yesBtn" onclick="goYes()">YES 😍</button>
+      <button id="noBtn">NO 🙃</button>
+    </div>
+  </div>
 
-<script src="/static/script.js"></script>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    let scale = 1;
+
+    // NO button jump + flip
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * 220 - 110;
+      const y = Math.random() * 120 - 60;
+      const r = Math.random() * 360;
+      noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+
+      // YES grows bigger
+      scale += 0.3;
+      yesBtn.style.transform = `scale(${scale})`;
+    });
+
+    function goYes() {
+      window.location.href = "/yes";
+    }
+
+    // Floating hearts animation
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("bg-heart");
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 10 + 12) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 9000);
+    }, 450);
+  </script>
+
 </body>
 </html>
