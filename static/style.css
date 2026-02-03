@@ -32,7 +32,49 @@ button {
     color: white;
     position: absolute;
 }
+/* 📱 Mobile screens */
+@media (max-width: 600px) {
+  .teddy {
+    width: 150px;
+  }
 
+  h1 {
+    font-size: 22px;
+  }
+
+  .buttons button {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .letter-box {
+    padding: 22px;
+  }
+}
+
+/* 💻 Laptop screens */
+@media (min-width: 768px) {
+  .teddy {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .buttons {
+    gap: 25px;
+  }
+
+  .letter-box {
+    max-width: 650px;
+    padding: 40px;
+  }
+
+  .letter-text {
+    font-size: 16px;
+  }
+}
 .letter {
     width: 80%;
     margin: auto;
