@@ -59,18 +59,18 @@ button {
 }
 .heart {
   position: fixed;
-  bottom: -20px;
-  animation: floatUp 6s linear;
-  opacity: 0.7;
+  bottom: -40px;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes floatUp {
   from {
-    transform: translateY(0);
-    opacity: 0.7;
+    transform: translateY(0) scale(1);
   }
   to {
-    transform: translateY(-110vh);
-    opacity: 0;
+    transform: translateY(-120vh) scale(1.6);
   }
 }
