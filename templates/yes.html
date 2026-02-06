@@ -1,35 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Yay 😘</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Surprise 💗</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  height:100vh;
+  background: radial-gradient(circle at top, #ffd6e8, #ff9acb);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* MAIN */
+.container{
+  text-align:center;
+  position:relative;
+}
+
+/* HEART */
+.heart{
+  font-size:120px;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+
+.heart-text{
+  position:absolute;
+  top:48%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:18px;
+  font-weight:600;
+  color:#fff;
+}
+
+/* BUTTONS */
+.buttons{
+  margin-top:30px;
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  transition:.6s;
+}
+
+button{
+  padding:14px 24px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  background:#fff;
+  color:#ff4d88;
+  font-weight:600;
+  box-shadow:0 10px 25px rgba(0,0,0,.18);
+  transition:.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* GLASS MESSAGE BOX */
+.message-box{
+  display:none;
+  margin-top:30px;
+  padding:28px 35px;
+  border-radius:22px;
+  font-size:20px;
+  font-weight:600;
+  color:#ff4d88;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.35);
+  border:1px solid rgba(255,255,255,0.4);
+  box-shadow:0 25px 40px rgba(0,0,0,.25);
+  min-height:100px;
+  z-index:2;
+}
+
+/* BACK */
+.back{
+  display:none;
+  margin-top:18px;
+  font-size:14px;
+  cursor:pointer;
+  color:#fff;
+  text-decoration:underline;
+}
+
+/* HEART BURST */
+.burst-heart{
+  position:absolute;
+  font-size:22px;
+  animation:burst 1.2s ease-out forwards;
+  pointer-events:none;
+}
+
+@keyframes burst{
+  to{
+    transform:translate(var(--x),var(--y)) scale(0);
+    opacity:0;
+  }
+}
+
+/* ROSE PETALS */
+.petal{
+  position:absolute;
+  top:-20px;
+  animation:fall 6s linear forwards;
+  opacity:0.8;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-    <h1>Good choice babu 😘</h1>
-    <p>You made the best decision 😌💘</p>
-    <a href="/letter">
-        <button id="yesBtn">Next 💌</button>
-    </a>
+  <div class="heart">❤️</div>
+  <div class="heart-text">Ready for surprises? 👀</div>
+
+  <div class="buttons" id="buttons">
+    <button onclick="showSurprise()">Show me 👀💗</button>
+    <button onclick="location.href='letter.html'">Only for you wifey 👑</button>
+  </div>
+
+  <div class="message-box" id="message"></div>
+  <div class="back" id="back" onclick="goBack()">⬅️ Take me back</div>
 </div>
+
+<script>
+const text = "Happy Rose Day 🌹\nHappy Anniversary baby 💋💕";
+let i = 0;
+
+function showSurprise(){
+  burstHearts();
+  document.getElementById("buttons").style.opacity="0";
+  document.getElementById("buttons").style.transform="scale(0.7)";
+
+  setTimeout(()=>{
+    document.getElementById("buttons").style.display="none";
+    document.getElementById("message").style.display="block";
+    document.getElementById("back").style.display="block";
+    typeText();
+    roseRain();
+  },600);
+}
+
+function typeText(){
+  const box=document.getElementById("message");
+  if(i<text.length){
+    box.innerHTML += text[i]==="\n" ? "<br>" : text[i];
+    i++;
+    setTimeout(typeText,70);
+  }
+}
+
+function burstHearts(){
+  for(let j=0;j<25;j++){
+    const h=document.createElement("div");
+    h.className="burst-heart";
+    h.innerHTML="💖";
+    h.style.left="50%";
+    h.style.top="50%";
+    h.style.setProperty("--x",`${Math.random()*300-150}px`);
+    h.style.setProperty("--y",`${Math.random()*300-150}px`);
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1200);
+  }
+}
+
+function roseRain(){
+  for(let r=0;r<25;r++){
+    const p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML="🌹";
+    p.style.left=Math.random()*100+"vw";
+    p.style.fontSize=(18+Math.random()*14)+"px";
+    p.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),6000);
+  }
+}
+
+function goBack(){
+  location.reload();
+}
+</script>
 
 </body>
-    <!-- Photo Slider -->
-<div class="photo-slider">
-  <img src="/static/photos/photo1.jpg" class="slide active">
-  <img src="/static/photos/photo2.jpg" class="slide">
-</div>
-
-<!-- Slider Script -->
-<script>
-  const slides = document.querySelectorAll(".photo-slider .slide");
-  let currentIndex = 0;
-
-  setInterval(() => {
-    slides[currentIndex].classList.remove("active");
-    currentIndex = (currentIndex + 1) % slides.length;
-    slides[currentIndex].classList.add("active");
-  }, 3000);
-</script>
 </html>
