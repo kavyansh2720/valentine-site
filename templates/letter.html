@@ -1,169 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For My Wifey ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💌</title>
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffd6e8, #fff1f7);
-      overflow-x: hidden;
-    }
+body{
+  height:100vh;
+  background: linear-gradient(135deg,#ffd6e8,#ff9acb);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
 
-    /* Background sparkles */
-    .bg-sparkles {
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: 0.08;
-      z-index: 0;
-      pointer-events: none;
-    }
+/* ENVELOPE */
+.envelope-container{
+  position:relative;
+  width:280px;
+  height:180px;
+  cursor:pointer;
+}
 
-    /* Floating hearts */
-    .bg-hearts::before {
-      content: "💗 💖 💕 💘 💓";
-      position: fixed;
-      width: 200%;
-      height: 200%;
-      font-size: 26px;
-      opacity: 0.15;
-      animation: floatHearts 35s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
+.envelope{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff4d88;
+  border-radius:0 0 12px 12px;
+  z-index:2;
+}
 
-    @keyframes floatHearts {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-400px, -600px); }
-    }
+.flap{
+  position:absolute;
+  top:0;
+  width:100%;
+  height:100%;
+  background:#ff77a8;
+  clip-path: polygon(0 0,100% 0,50% 60%);
+  transform-origin:top;
+  transition:transform 1s ease;
+  z-index:3;
+}
 
-    /* Letter container */
-    .letter-box {
-      position: relative;
-      z-index: 2;
-      max-width: 720px;
-      margin: 40px auto;
-      padding: 25px 22px 45px;
-      background: rgba(255,255,255,0.96);
-      border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(255,105,180,0.3);
-      text-align: center;
-    }
+/* LETTER */
+.letter{
+  position:absolute;
+  width:260px;
+  background:#fff;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(60px);
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  opacity:0;
+  transition:1.2s ease;
+  z-index:1;
+  text-align:left;
+}
 
-    /* Teddy */
-    .teddy {
-      width: 140px;
-      margin: 0 auto 12px;
-      animation: hug 2.5s infinite ease-in-out;
-    }
+/* OPEN STATE */
+.open .flap{
+  transform:rotateX(180deg);
+}
 
-    @keyframes hug {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
+.open .letter{
+  transform:translateX(-50%) translateY(-200px);
+  opacity:1;
+}
 
-    /* Letter text */
-    #letter-text {
-      white-space: pre-line;
-      font-size: 17px;
-      line-height: 1.75;
-      color: #444;
-      margin-top: 15px;
-    }
+/* LETTER TEXT */
+.letter h2{
+  color:#ff4d88;
+  margin-bottom:12px;
+}
 
-    /* Heart rain */
-    .heart {
-      position: fixed;
-      top: -20px;
-      font-size: 20px;
-      animation: fall 5s linear forwards;
-      pointer-events: none;
-      z-index: 3;
-    }
+.letter p{
+  font-size:15px;
+  line-height:1.6;
+  color:#444;
+}
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
-  </style>
+/* HEARTS */
+.heart{
+  position:absolute;
+  animation:float 6s linear infinite;
+  opacity:.5;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-120vh);}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Background layers -->
-  <div class="bg-hearts"></div>
-  <div class="bg-sparkles"></div>
+<div class="envelope-container" onclick="openEnvelope()" id="env">
+  <div class="flap"></div>
+  <div class="envelope"></div>
 
-  <!-- Letter -->
-  <div class="letter-box">
+  <div class="letter">
+    <h2>Dear wifey 💖</h2>
+    <p>
+      Happy Valentine’s Day babu 💕<br><br>
 
-    <!-- LOCAL TEDDY IMAGE -->
-    <img 
-      src="{{ url_for('static', filename='images/teddy.png') }}" 
-      alt="Teddy Hug"
-      class="teddy"
-    >
+      I am the luckiest man to have you in my life baby, not just as my Valentine
+      but as mine — my partner in everything.  
+      Har ek din teaches me ki real comfort, care aur love kya hota hai.
+      Tumhari har ek harkat meri favourite hai bubu 🫶<br><br>
 
-    <!-- Letter text -->
-    <div id="letter-text"></div>
-
+      You are really special to me. I can’t imagine even a single second without you.
+      I know main din mein bohot baar “I love you” bolta hoon,
+      but I’ll never get tired of saying it — even a thousand times a day.
+      Because you are my cute little princess 👑
+      and the most beautiful girl I know.
+      I’m always proud of you and proud to call you mine ❤️
+      <br><br>
+      Yours forever,<br>
+      <strong>Your hubby — Kavyansh Rashika Arora</strong>
+    </p>
   </div>
+</div>
 
-  <!-- JS -->
-  <script>
-    const letter = `Dear wifey ❤️
-Happy Valentine's Day babu 😘
+<script>
+function openEnvelope(){
+  document.getElementById("env").classList.add("open");
+  heartRain();
+}
 
-I am really lucky to have you in my life babyy, not just as my Valentine but as mine — my partner in everything. Har ek din mujhe ye sikhaata hai ki real comfort, care aur love kya hota hai, aur honestly ye sab meri favourite cheezein hain bubu.
-
-You are really really special to me. I can't imagine even a single second without you. I know main din mein bohot baar "I love you" bolta hoon, but I’ll never get tired of saying it — not even a thousand times a day.
-
-Because you are my cute little princess 👑, the most beautiful girl I know, and I am hamesha proud of you and proud to call you mine 💕
-
-Yours forever,
-Kavyansh Rashika Arora`;
-
-    let index = 0;
-    const speed = 40;
-    const textElement = document.getElementById("letter-text");
-
-    function typeLetter() {
-      if (index < letter.length) {
-        textElement.innerHTML += letter.charAt(index);
-        index++;
-        setTimeout(typeLetter, speed);
-      } else {
-        startHeartRain();
-      }
-    }
-
-    typeLetter();
-
-    function startHeartRain() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerText = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 10 + 15) + "px";
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 5000);
-      }, 280);
-    }
-  </script>
+function heartRain(){
+  for(let i=0;i<20;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(14+Math.random()*20)+"px";
+    h.style.animationDuration=(4+Math.random()*4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  }
+}
+</script>
 
 </body>
 </html>
