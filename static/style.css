@@ -8,35 +8,57 @@ body {
     height: 100vh;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* ===== CHOCOLATE BACKGROUND ===== */
+/* ===== GLASS ===== */
+.glass {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+    text-align: center;
+}
+
+/* ===== INDEX ===== */
+.index-bg {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+.proposal-box h1 {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+#yesBtn {
+    padding: 14px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+#noBtn {
+    padding: 14px 30px;
+    border-radius: 30px;
+    border: none;
+    background: #ccc;
+}
+
+/* ===== YES PAGE ===== */
 .choco-bg {
     background: radial-gradient(circle at top, #5a2d0c, #2b1408);
-    position: relative;
+    flex-direction: column;
 }
 
-/* Chocolate rain */
-.choco {
-    position: absolute;
-    font-size: 30px;
-    opacity: 0.35;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    from {
-        transform: translateY(-10vh) rotate(0deg);
-    }
-    to {
-        transform: translateY(110vh) rotate(360deg);
-    }
-}
-
-/* ===== HEART ===== */
 .center-heart {
     font-size: 90px;
     animation: heartbeat 1.4s infinite;
@@ -44,59 +66,25 @@ body {
 }
 
 @keyframes heartbeat {
-    0% { transform: scale(1); }
     50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
 }
 
-/* ===== GLASS BOX ===== */
-.glass {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(16px);
-    border-radius: 24px;
-    padding: 30px 35px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
-    text-align: center;
-}
-
-/* ===== BUTTONS ===== */
-.choice-buttons {
+.choice-box {
     display: flex;
     gap: 20px;
-}
-
-button {
-    border: none;
-    border-radius: 30px;
-    padding: 14px 26px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .primary-btn {
     background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
     color: white;
-    font-size: 18px;
-}
-
-.primary-btn:hover {
-    transform: scale(1.15);
-    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.6);
 }
 
 .secondary-btn {
-    background: linear-gradient(135deg, #ffb703, #ffd166);
-    color: #3a1a00;
+    background: linear-gradient(135deg, #ffd166, #ffb703);
 }
 
-.secondary-btn:hover {
-    transform: scale(1.08);
-}
-
-/* ===== MESSAGE BOX ===== */
-#messageBox {
-    max-width: 320px;
+.hidden {
+    display: none;
 }
 
 #typingText {
@@ -105,15 +93,33 @@ button {
     line-height: 1.6;
 }
 
-/* ===== BACK BUTTON ===== */
 .back-btn {
     margin-top: 20px;
-    background: #fff;
-    color: #3a1a00;
-    font-weight: bold;
 }
 
-/* ===== UTIL ===== */
-.hidden {
-    display: none;
+/* ===== LETTER ===== */
+.letter-bg {
+    background: #fdf0f5;
+}
+
+.envelope {
+    width: 320px;
+    height: 220px;
+    background: #ffccd5;
+    position: relative;
+    cursor: pointer;
+}
+
+.flap {
+    height: 50%;
+    background: #ff8fab;
+}
+
+.paper {
+    padding: 20px;
+}
+
+.teddy {
+    font-size: 48px;
+    margin-top: 10px;
     }
