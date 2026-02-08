@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 💌</title>
+<title>For My Wifey 🍫💖</title>
 
 <style>
 *{
@@ -15,140 +15,200 @@
 
 body{
   height:100vh;
-  background: linear-gradient(135deg,#ffd6e8,#ff9acb);
+  background: linear-gradient(135deg,#4b2c20,#7a3e2e,#ffb6c1);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  color:#4a2a1d;
 }
 
-/* ENVELOPE */
-.envelope-container{
+/* CHOCOLATE BOX */
+.box-container{
   position:relative;
   width:280px;
-  height:180px;
+  height:200px;
   cursor:pointer;
+  text-align:center;
 }
 
-.envelope{
+.box{
   position:absolute;
+  bottom:0;
   width:100%;
-  height:100%;
-  background:#ff4d88;
-  border-radius:0 0 12px 12px;
+  height:140px;
+  background:#6b3e2e;
+  border-radius:0 0 18px 18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
   z-index:2;
 }
 
-.flap{
+.lid{
   position:absolute;
   top:0;
   width:100%;
-  height:100%;
-  background:#ff77a8;
-  clip-path: polygon(0 0,100% 0,50% 60%);
+  height:100px;
+  background:#8b4b36;
+  border-radius:18px 18px 0 0;
   transform-origin:top;
-  transition:transform 1s ease;
+  transition:1s ease;
   z-index:3;
+}
+
+.tap-text{
+  position:absolute;
+  bottom:-40px;
+  width:100%;
+  font-size:14px;
+  color:#fff;
+  opacity:.9;
 }
 
 /* LETTER */
 .letter{
   position:absolute;
-  width:260px;
-  background:#fff;
-  top:20px;
+  width:300px;
+  background:rgba(255,255,255,.92);
+  border-radius:20px;
+  padding:26px;
+  top:40px;
   left:50%;
-  transform:translateX(-50%) translateY(60px);
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  transform:translateX(-50%) translateY(80px);
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
   opacity:0;
   transition:1.2s ease;
   z-index:1;
-  text-align:left;
+  backdrop-filter:blur(8px);
 }
 
 /* OPEN STATE */
-.open .flap{
+.open .lid{
   transform:rotateX(180deg);
 }
 
 .open .letter{
-  transform:translateX(-50%) translateY(-200px);
+  transform:translateX(-50%) translateY(-260px);
   opacity:1;
 }
 
 /* LETTER TEXT */
 .letter h2{
   color:#ff4d88;
-  margin-bottom:12px;
+  margin-bottom:14px;
+  text-align:center;
 }
 
 .letter p{
-  font-size:15px;
-  line-height:1.6;
+  font-size:14.8px;
+  line-height:1.65;
   color:#444;
 }
 
-/* HEARTS */
-.heart{
+/* PETALS & HEARTS */
+.fall{
   position:absolute;
-  animation:float 6s linear infinite;
-  opacity:.5;
+  top:-20px;
+  animation:fall 7s linear forwards;
+  opacity:.8;
 }
 
-@keyframes float{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-120vh);}
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* TEDDY */
+.teddy{
+  display:none;
+  text-align:center;
+  font-size:48px;
+  margin-top:18px;
+  animation:hug 2s infinite;
+}
+
+@keyframes hug{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+
+/* BACK */
+.back{
+  position:fixed;
+  bottom:20px;
+  font-size:14px;
+  color:#fff;
+  text-decoration:underline;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope-container" onclick="openEnvelope()" id="env">
-  <div class="flap"></div>
-  <div class="envelope"></div>
+<div class="box-container" id="box" onclick="openBox()">
+  <div class="lid"></div>
+  <div class="box"></div>
+  <div class="tap-text">Tap to open your surprise 💕</div>
 
-  <div class="letter">
+  <div class="letter" id="letter">
     <h2>Dear wifey 💖</h2>
-    <p>
-      Happy Valentine’s Day babu 💕<br><br>
-
-      I am the luckiest man to have you in my life baby, not just as my Valentine
-      but as mine — my partner in everything.  
-      Har ek din teaches me ki real comfort, care aur love kya hota hai.
-      Tumhari har ek harkat meri favourite hai bubu 🫶<br><br>
-
-      You are really special to me. I can’t imagine even a single second without you.
-      I know main din mein bohot baar “I love you” bolta hoon,
-      but I’ll never get tired of saying it — even a thousand times a day.
-      Because you are my cute little princess 👑
-      and the most beautiful girl I know.
-      I’m always proud of you and proud to call you mine ❤️
-      <br><br>
-      Yours forever,<br>
-      <strong>Your hubby — Kavyansh Rashika Arora</strong>
-    </p>
+    <p id="text"></p>
+    <div class="teddy" id="teddy">🧸💞</div>
   </div>
 </div>
 
+<div class="back" onclick="location.href='yes.html'">⬅️ Go back</div>
+
 <script>
-function openEnvelope(){
-  document.getElementById("env").classList.add("open");
-  heartRain();
+const letterText = `Happy Valentine’s Day babu 💕
+
+I am the luckiest man to have you in my life baby, not just as my Valentine but as mine — my partner in everything.
+Har ek din teaches me ki real comfort, care aur love kya hota hai.
+Tumhari har ek harkat meri favourite hai bubu 🫶
+
+You are really special to me. I can’t imagine even a single second without you.
+I know main din mein bohot baar “I love you” bolta hoon,
+but I’ll never get tired of saying it — even a thousand times a day.
+Because you are my cute little princess 👑
+and the most beautiful girl I know.
+I’m always proud of you and proud to call you mine ❤️
+
+Your hubby — Kavyansh Rashika Arora`;
+
+let i = 0;
+let opened = false;
+
+function openBox(){
+  if(opened) return;
+  opened = true;
+  document.getElementById("box").classList.add("open");
+  typeLetter();
+  rain();
 }
 
-function heartRain(){
-  for(let i=0;i<20;i++){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(14+Math.random()*20)+"px";
-    h.style.animationDuration=(4+Math.random()*4)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),8000);
+function typeLetter(){
+  const p = document.getElementById("text");
+  if(i < letterText.length){
+    p.innerHTML += letterText[i] === "\n" ? "<br>" : letterText[i];
+    i++;
+    setTimeout(typeLetter, 40);
+  } else {
+    document.getElementById("teddy").style.display = "block";
+  }
+}
+
+function rain(){
+  for(let j=0;j<40;j++){
+    const e = document.createElement("div");
+    e.className="fall";
+    e.innerHTML = Math.random() > 0.5 ? "🌹" : "💖";
+    e.style.left = Math.random()*100 + "vw";
+    e.style.fontSize = (16 + Math.random()*18) + "px";
+    e.style.animationDelay = Math.random()*2 + "s";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),7000);
   }
 }
 </script>
