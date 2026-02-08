@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Surprise 💗</title>
+<title>Happy Chocolate Day 🍫</title>
 
 <style>
 *{
@@ -15,114 +15,117 @@
 
 body{
   height:100vh;
-  background: radial-gradient(circle at top, #ffd6e8, #ff9acb);
+  background: linear-gradient(135deg, #4b2c20, #7a3e2e, #ffb6c1);
   overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
+  color:#fff;
 }
 
-/* MAIN */
+/* CONTAINER */
 .container{
   text-align:center;
   position:relative;
+  padding:20px;
 }
 
-/* HEART */
-.heart{
-  font-size:120px;
-  animation:pulse 2s infinite;
+/* CHOCOLATE HEART */
+.choco-heart{
+  font-size:110px;
+  animation:pulse 2.5s infinite;
 }
 
 @keyframes pulse{
   0%,100%{transform:scale(1);}
-  50%{transform:scale(1.08);}
+  50%{transform:scale(1.1);}
 }
 
-.heart-text{
-  position:absolute;
-  top:48%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:18px;
-  font-weight:600;
-  color:#fff;
+/* TITLE */
+.title{
+  margin-top:10px;
+  font-size:28px;
+  font-weight:700;
+}
+
+.subtitle{
+  font-size:16px;
+  opacity:.9;
+  margin-bottom:30px;
 }
 
 /* BUTTONS */
 .buttons{
-  margin-top:30px;
   display:flex;
-  gap:20px;
+  gap:18px;
   justify-content:center;
-  transition:.6s;
+  flex-wrap:wrap;
+  transition:.6s ease;
 }
 
 button{
-  padding:14px 24px;
+  padding:14px 26px;
   border:none;
   border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
-  background:#fff;
-  color:#ff4d88;
+  font-size:15px;
   font-weight:600;
-  box-shadow:0 10px 25px rgba(0,0,0,.18);
+  cursor:pointer;
+  background:linear-gradient(135deg,#fff,#ffe0ec);
+  color:#7a3e2e;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
   transition:.3s;
 }
 
 button:hover{
-  transform:scale(1.1);
+  transform:scale(1.12);
 }
 
-/* GLASS MESSAGE BOX */
-.message-box{
+/* GLASS BOX */
+.choco-box{
   display:none;
   margin-top:30px;
-  padding:28px 35px;
+  padding:26px 30px;
   border-radius:22px;
+  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,0.35);
+  border:1px solid rgba(255,255,255,0.45);
+  color:#5a2c1d;
+  box-shadow:0 25px 45px rgba(0,0,0,.35);
   font-size:20px;
   font-weight:600;
-  color:#ff4d88;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.35);
-  border:1px solid rgba(255,255,255,0.4);
-  box-shadow:0 25px 40px rgba(0,0,0,.25);
-  min-height:100px;
-  z-index:2;
+  min-height:90px;
 }
 
 /* BACK */
 .back{
   display:none;
-  margin-top:18px;
+  margin-top:16px;
   font-size:14px;
   cursor:pointer;
-  color:#fff;
   text-decoration:underline;
 }
 
-/* HEART BURST */
-.burst-heart{
+/* CHOCOLATE BURST */
+.choco{
   position:absolute;
   font-size:22px;
-  animation:burst 1.2s ease-out forwards;
+  animation:burst 1.3s ease-out forwards;
   pointer-events:none;
 }
 
 @keyframes burst{
   to{
-    transform:translate(var(--x),var(--y)) scale(0);
+    transform:translate(var(--x),var(--y)) rotate(360deg) scale(0);
     opacity:0;
   }
 }
 
-/* ROSE PETALS */
-.petal{
+/* COCOA RAIN */
+.cocoa{
   position:absolute;
   top:-20px;
-  animation:fall 6s linear forwards;
-  opacity:0.8;
+  animation:fall 7s linear forwards;
+  opacity:.8;
 }
 
 @keyframes fall{
@@ -137,69 +140,73 @@ button:hover{
 <body>
 
 <div class="container">
-  <div class="heart">❤️</div>
-  <div class="heart-text">Ready for surprises? 👀</div>
+
+  <div class="choco-heart">🍫❤️</div>
+  <div class="title">Happy Chocolate Day 🍫💖</div>
+  <div class="subtitle">For the sweetest part of my life…</div>
 
   <div class="buttons" id="buttons">
-    <button onclick="showSurprise()">Show me 👀💗</button>
+    <button onclick="openChocolate()">Open my chocolate surprise 🍫</button>
     <button onclick="location.href='letter.html'">Only for you wifey 👑</button>
   </div>
 
-  <div class="message-box" id="message"></div>
-  <div class="back" id="back" onclick="goBack()">⬅️ Take me back</div>
+  <div class="choco-box" id="box"></div>
+  <div class="back" id="back" onclick="goBack()">⬅️ Go back</div>
+
 </div>
 
 <script>
-const text = "Happy Rose Day 🌹\nHappy Anniversary baby 💋💕";
-let i = 0;
+const message =
+"Happy Chocolate Day baby 🍫\nYou make my life sweeter every single day 💕";
+let index = 0;
 
-function showSurprise(){
-  burstHearts();
+function openChocolate(){
+  burstChocolate();
   document.getElementById("buttons").style.opacity="0";
-  document.getElementById("buttons").style.transform="scale(0.7)";
+  document.getElementById("buttons").style.transform="scale(0.8)";
 
   setTimeout(()=>{
     document.getElementById("buttons").style.display="none";
-    document.getElementById("message").style.display="block";
+    document.getElementById("box").style.display="block";
     document.getElementById("back").style.display="block";
-    typeText();
-    roseRain();
+    typeMessage();
+    cocoaRain();
   },600);
 }
 
-function typeText(){
-  const box=document.getElementById("message");
-  if(i<text.length){
-    box.innerHTML += text[i]==="\n" ? "<br>" : text[i];
-    i++;
-    setTimeout(typeText,70);
+function typeMessage(){
+  const box=document.getElementById("box");
+  if(index < message.length){
+    box.innerHTML += message[index]==="\n" ? "<br>" : message[index];
+    index++;
+    setTimeout(typeMessage,70);
   }
 }
 
-function burstHearts(){
-  for(let j=0;j<25;j++){
-    const h=document.createElement("div");
-    h.className="burst-heart";
-    h.innerHTML="💖";
-    h.style.left="50%";
-    h.style.top="50%";
-    h.style.setProperty("--x",`${Math.random()*300-150}px`);
-    h.style.setProperty("--y",`${Math.random()*300-150}px`);
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1200);
+function burstChocolate(){
+  for(let i=0;i<28;i++){
+    const c=document.createElement("div");
+    c.className="choco";
+    c.innerHTML="🍫";
+    c.style.left="50%";
+    c.style.top="50%";
+    c.style.setProperty("--x",`${Math.random()*320-160}px`);
+    c.style.setProperty("--y",`${Math.random()*320-160}px`);
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1300);
   }
 }
 
-function roseRain(){
-  for(let r=0;r<25;r++){
-    const p=document.createElement("div");
-    p.className="petal";
-    p.innerHTML="🌹";
-    p.style.left=Math.random()*100+"vw";
-    p.style.fontSize=(18+Math.random()*14)+"px";
-    p.style.animationDelay=Math.random()*2+"s";
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),6000);
+function cocoaRain(){
+  for(let i=0;i<30;i++){
+    const drop=document.createElement("div");
+    drop.className="cocoa";
+    drop.innerHTML="🍬";
+    drop.style.left=Math.random()*100+"vw";
+    drop.style.fontSize=(16+Math.random()*16)+"px";
+    drop.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(drop);
+    setTimeout(()=>drop.remove(),7000);
   }
 }
 
